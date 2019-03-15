@@ -10,8 +10,8 @@ func send(ch chan int) {
 	i := 0
 	for {
 		fmt.Println("send --> ", i)
-		time.Sleep(5 * time.Second)
 		ch <- i
+		time.Sleep(5 * time.Second)
 		i++
 	}
 }
@@ -25,7 +25,7 @@ func rec(ch chan int) {
 }
 
 func main() {
-	ch := make(chan int)
+	ch := make(chan int, 3)
 
 	go send(ch)
 	go rec(ch)
