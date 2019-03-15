@@ -2,34 +2,35 @@ package main
 
 import (
 	"fmt"
-	
+
 	"time"
 )
 
-func a (){
+func send(ch chan int) {
+	i := 0
 	for {
-		fmt.Println("Hallo ... a")
-		time.Sleep( 2 * time.Second )
+		fmt.Println("send --> ", i)
+		time.Sleep(5 * time.Second)
+		ch <- i
+		i++
 	}
 }
 
-
-func b (){
+func rec(ch chan int) {
 	for {
-		fmt.Println("Hallo ... b")
-		time.Sleep( 2 * time.Second )
+		i := <-ch
+		fmt.Println("rec  --> ", i)
+		fmt.Println("-----------------")
 	}
 }
-
 
 func main() {
-	//ci := make(chan int) 
-	
+	ch := make(chan int)
 
-	go a()
-	go b()
+	go send(ch)
+	go rec(ch)
 	for {
 		fmt.Println(".... waiting ")
-		time.Sleep( 2 * time.Second )
+		time.Sleep(20 * time.Second)
 	}
 }
