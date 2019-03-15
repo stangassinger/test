@@ -2,14 +2,23 @@ package main
 
 import (
 	"fmt"
-
 	"time"
 )
 
-func send(ch chan int) {
+func send1(ch chan int) {
 	i := 0
 	for {
-		fmt.Println("send --> ", i)
+		fmt.Println("send1 --> ", i)
+		ch <- i
+		time.Sleep(5 * time.Second)
+		i++
+	}
+}
+
+func send2(ch chan int) {
+	i := 0
+	for {
+		fmt.Println("send2 --> ", i)
 		ch <- i
 		time.Sleep(5 * time.Second)
 		i++
@@ -25,9 +34,10 @@ func rec(ch chan int) {
 }
 
 func main() {
-	ch := make(chan int, 3)
+	ch := make(chan int)
 
-	go send(ch)
+	go send1(ch)
+	go send2(ch)
 	go rec(ch)
 	for {
 		fmt.Println(".... waiting ")
