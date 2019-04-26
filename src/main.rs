@@ -88,6 +88,7 @@ fn main() -> ! {
 
 
 
+
     if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
         // Constrain clock registers
         let mut rcc = p.RCC.constrain();
@@ -232,6 +233,6 @@ fn DefaultHandler(irqn: i16) {
 // used when invoking C code to configure system clock
 //
 //#[exception]
-fn SysTick() {
-     unsafe { HAL_IncTick() }
-}
+//fn SysTick() {
+//     unsafe { HAL_IncTick() }
+//}
