@@ -139,6 +139,7 @@ fn main() -> ! {
         loop {
             // Turn LED on
             led_green.set_high();
+            led_red.set_low();
            // blink( &mut true);
 
             // Delay twice for half a second due to limited timer resolution
@@ -146,6 +147,7 @@ fn main() -> ! {
 
             // Turn LED off
             led_green.set_low();
+            led_red.set_high();
            // blink( &mut false );
 
             // Delay twice for half a second due to limited timer resolution
