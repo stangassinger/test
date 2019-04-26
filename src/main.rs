@@ -32,6 +32,17 @@ use board::nb::block;
 use btoi::btoi;
 
 
+// used when invoking C code to configure system clock
+ extern "C" {
+     fn HAL_Init();
+     fn HAL_IncTick();
+     fn SystemClock_Config();
+ }
+
+
+
+
+
 #[macro_use]
 
 const ILI9341_RESET: u8 = 0x01;
@@ -71,6 +82,12 @@ fn fifo() -> &'static mut ArrayDeque<[u8; 256]> {
 
 #[entry]
 fn main() -> ! {
+   // used when invoking C code to configure system clock
+    unsafe { HAL_Init(); }
+    unsafe { SystemClock_Config(); }
+
+
+
     if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
         // Constrain clock registers
         let mut rcc = p.RCC.constrain();
@@ -208,4 +225,13 @@ fn HardFault(ef: &cortex_m_rt::ExceptionFrame) -> ! {
 #[cortex_m_rt::exception]
 fn DefaultHandler(irqn: i16) {
     panic!("Unhandled exception (IRQn = {})", irqn);
+}
+
+
+
+// used when invoking C code to configure system clock
+//
+//#[exception]
+fn SysTick() {
+     unsafe { HAL_IncTick() }
 }
