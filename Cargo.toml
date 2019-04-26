@@ -46,3 +46,7 @@ debug = true
 debug = true
 lto = true
 opt-level = "s"
+
+# used when invoking C code to configure system clock
+[build-dependencies]
+cc = "1.0.28"
