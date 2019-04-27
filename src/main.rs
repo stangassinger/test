@@ -37,6 +37,8 @@ use btoi::btoi;
      fn HAL_Init();
      fn HAL_IncTick();
      fn SystemClock_Config();
+     fn MX_GPIO_Init();
+     fn my_func();
  }
 
 
@@ -45,50 +47,26 @@ use btoi::btoi;
 
 #[macro_use]
 
-const ILI9341_RESET: u8 = 0x01;
-const ILI9341_SLEEP_OUT: u8 = 0x11;
-const ILI9341_DISPLAY_ON: u8 = 0x29;
-const ILI9341_MAC: u8 = 0x36;
-// const ILI9341_PIXEL_FORMAT: u8 = 0x3A;
-const ILI9341_RGB_INTERFACE: u8 = 0xB0;
-const ILI9341_INTERFACE: u8 = 0xF6;
 
-
-const WIDTH: usize = 320;
-const HEIGHT: usize = 240;
-const PITCH: usize = 250;
-const COLS: u16 = 53;
-const ROWS: u16 = 24;
-const CHARH: u16 = 10;
-const CHARW: u16 = 6;
-const DEFAULT_COLOR: u8 = 7;
-const DEFAULT_BKGRD: u8 = 0;
-
-// main framebuffer
-static mut FRAMEBUF: [u8; 250*320] = [0; 250*320];
-// cursor framebuffer, just the cursor itself
-static CURSORBUF: [u8; 6] = [127; 6];
-
-// TX receive buffer
-static mut RXBUF: Option<ArrayDeque<[u8; 256]>> = None;
 
 
 static mut MARKER : bool = false;
 
-fn fifo() -> &'static mut ArrayDeque<[u8; 256]> {
-    unsafe { RXBUF.get_or_insert_with(ArrayDeque::new) }
-}
+
 
 
 #[entry]
 fn main() -> ! {
    // used when invoking C code to configure system clock
     unsafe { HAL_Init(); }
-    unsafe { SystemClock_Config(); }
+    unsafe { SystemClock_Config(); }    
+    unsafe { MX_GPIO_Init(); }
+    unsafe { my_func(); }
+    
 
 
 
-
+/*
     if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
         // Constrain clock registers
         let mut rcc = p.RCC.constrain();
@@ -151,9 +129,9 @@ fn main() -> ! {
        // Get delay provider
         let mut timer = Delay::new( cp.SYST, clocks);
 
+*/
 
-
-        
+      /*  
         loop {
             // Turn LED on
             led_green.set_high();
@@ -181,9 +159,11 @@ unsafe{
 
 
         }
+        
     }
-
+*/
     loop {
+        unsafe { my_func(); }
         continue;
     }
 }
