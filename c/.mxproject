@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=/home/abc/cube_examples/stm32f429_4/Inc
+HeaderPath=/home/abc/pwm/test/c/Inc
 HeaderFiles=stm32f4xx_it.h;stm32f4xx_hal_conf.h;main.h;
-SourcePath=/home/abc/cube_examples/stm32f429_4/Src
+SourcePath=/home/abc/pwm/test/c/Src
 SourceFiles=stm32f4xx_it.c;stm32f4xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

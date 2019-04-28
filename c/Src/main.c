@@ -53,7 +53,7 @@ void my_func(void){
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void MX_GPIO_Init(void);
+static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -67,7 +67,7 @@ void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-int no_main(void)
+int main(void)
 {
   /* USER CODE BEGIN 1 */
 
@@ -154,7 +154,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
-void MX_GPIO_Init(void)
+static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
