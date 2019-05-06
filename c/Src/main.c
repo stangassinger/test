@@ -44,22 +44,21 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-void my_func(void){
-    //HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13 );
-    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13,GPIO_PIN_SET);
-}
+
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void MX_GPIO_Init(void);
+static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void amy_func(void);
+int amy_delay(void);
 
 /* USER CODE END 0 */
 
@@ -67,7 +66,7 @@ void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-int no_main(void)
+int main(void)
 {
   /* USER CODE BEGIN 1 */
 
@@ -154,7 +153,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
-void MX_GPIO_Init(void)
+static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -222,12 +221,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MEMS_INT1_Pin MEMS_INT2_Pin */
   GPIO_InitStruct.Pin = MEMS_INT1_Pin|MEMS_INT2_Pin;
@@ -397,6 +390,20 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void amy_func(void){
+  HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13 );
+    HAL_Delay(1000);
+    HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_14 );
+    //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13,GPIO_PIN_SET);
+}
+
+int amy_delay(void){
+    HAL_Delay(1000);
+    //HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13 );
+    //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13,GPIO_PIN_SET);
+    return 8;
+}
 
 /* USER CODE END 4 */
 

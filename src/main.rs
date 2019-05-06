@@ -35,10 +35,11 @@ use btoi::btoi;
 // used when invoking C code to configure system clock
  extern "C" {
      fn HAL_Init();
-     fn HAL_IncTick();
+     //fn HAL_IncTick();
      fn SystemClock_Config();
      fn MX_GPIO_Init();
-     fn my_func();
+     fn amy_func();
+     fn amy_delay() -> u32; 
  }
 
 
@@ -61,7 +62,8 @@ fn main() -> ! {
     unsafe { HAL_Init(); }
     unsafe { SystemClock_Config(); }    
     unsafe { MX_GPIO_Init(); }
-    unsafe { my_func(); }
+    unsafe { amy_func(); }
+    unsafe { amy_delay(); }
     
 
 
@@ -162,9 +164,13 @@ unsafe{
         
     }
 */
+    let mut output : u32 = 0;
     loop {
-        unsafe { my_func(); }
-        continue;
+        output = unsafe { amy_delay() };
+        unsafe { amy_func() }
+        
+        
+        //continue;
     }
 }
 
