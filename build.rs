@@ -32,6 +32,7 @@ fn main() {
       .file("c/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c")
       .file("c/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c")
       .file("c/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c")
+      .file("c/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c")
       .flag("-fno-pic")
       .archiver("arm-none-eabi-ar")
       .compile("libdevice.a");

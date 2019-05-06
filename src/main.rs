@@ -35,7 +35,7 @@ use btoi::btoi;
 // used when invoking C code to configure system clock
  extern "C" {
      fn HAL_Init();
-     //fn HAL_IncTick();
+     fn HAL_IncTick();
      fn SystemClock_Config();
      fn MX_GPIO_Init();
      fn amy_func();
@@ -170,7 +170,7 @@ unsafe{
         unsafe { amy_func() }
         
         
-        //continue;
+        continue;
     }
 }
 
@@ -218,7 +218,7 @@ fn DefaultHandler(irqn: i16) {
 
 // used when invoking C code to configure system clock
 //
-//#[exception]
-//fn SysTick() {
-//     unsafe { HAL_IncTick() }
-//}
+#[cortex_m_rt::exception]
+fn SysTick() {
+     unsafe { HAL_IncTick() }
+}
